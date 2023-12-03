@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Photo</title>
+
+    <style>
+        #photo_box{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 20px;
+        }
+          
+        .photoDetails{
+            border: 2px solid yellowgreen;
+            border-radius: 5px;
+            padding:20px;
+          
+        }
+    </style>
+</head>
+<body>
+<div id="photo_box">
+
+</div>
+
+
+<script>
+    function loadedphoto(){
+        fetch('https://jsonplaceholder.typicode.com/photos')
+        .then(res => res.json())
+        .then(data =>displayphotos(data))
+    }
+    loadedphoto()
+    function displayphotos(photos) {
+        console.log(photos);
+        const photobox = document.getElementById('photo_box')
+        for (const forr of photos) {
+
+            const DIV = document.createElement('div');
+            DIV.classList.add('photoDetails')
+            DIV.innerHTML = `
+            <h3>${forr.id}</h3>
+            <p>${forr.title}</p>
+            <img src="${forr.thumbnailUrl}" alt="">
+
+            `
+            photobox.appendChild(DIV)
+
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
